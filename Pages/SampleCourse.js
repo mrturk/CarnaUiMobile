@@ -8,8 +8,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const image = require('../assets/congratulations.jpg')
 export default function SampleCourse({navigation}){
 
+    //Get the token information stored 
     async function getToken(){
         try{
+            //fetch data with key token
             const value = await AsyncStorage.getItem('token');
             setToken(value)
         }catch(err){
@@ -17,13 +19,25 @@ export default function SampleCourse({navigation}){
         }
     }
 
+    //To dynamically access react elements with reference
     const [getRef, setRef] =  useDynamicRefs();
+
     const [token,setToken] = useState()
+
+    //if true then show congratulations component
     const [sholdShow, setSholdShow] = useState(false)
+    //Percentage complete
     const [compolated, setComplated] = useState(0);
+
+    //percentage of progressbar
     const [progress, setPRogress] = useState(0);
+
+    //Left objects
     const [idLeft,setIdLeft]= useState('');
+    //Right objects
     const [idRight,setIdRight]= useState('');
+
+    //mock data
     const [correctAnswer,setCorrectAnswer] = useState([ 
     {
         answer:"pocket money",
@@ -40,6 +54,8 @@ export default function SampleCourse({navigation}){
     {
         answer:"office worker",
     }]);
+
+    //mock data
     const [data,setData]=useState([
     {
         chosen1:"pocket",
@@ -63,11 +79,15 @@ export default function SampleCourse({navigation}){
     }]);
     const [answer,setAnswer] = useState(``);
 
+    //Run getToken method when component is called
     useEffect(()=>{
         getToken();
     })
 
     useEffect(()=>{
+
+        //Creating css operation based on drag and drop changing answer, idLeft, idRight states
+
         correctAnswer.map(r=>{
             if(r.answer==answer){
                 const refIdLeft = getRef(idLeft)
@@ -112,6 +132,7 @@ export default function SampleCourse({navigation}){
             
             <View style={styles.container}>
                 {
+                    //Show components by sholdShow state
                     sholdShow ? (
                         <>
                         <View style={{width:'100%',justifyContent:'center',alignItems:'center'}}>

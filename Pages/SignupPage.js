@@ -2,7 +2,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import React, { useEffect, useState } from 'react';
 import { ImageBackground,StyleSheet, Text, View,Button,Alert,TouchableOpacity,TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import axios from 'axios';
+import {register} from '../APIs/services'
 const image = require('../assets/RegisterPage.png')
 export default function SignupPage({navigation}) {
 
@@ -31,12 +31,14 @@ export default function SignupPage({navigation}) {
       Alert.alert("Fill in the fields");
       return
     }
-    axios.post('http://192.168.0.137/user/create',data).then(function(response){
-      console.log(response)
-      navigation.navigate('Login')
-    }).catch(function(err){
-      console.log(err)
-    })
+      register(data)
+      .then(function(response) {
+        console.log(response)
+        navigation.navigate('Login')
+      })
+      .catch(function(err) {
+        console.log(err)
+      })
   }
   return (
     <View style={styles.container}>

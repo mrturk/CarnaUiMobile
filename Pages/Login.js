@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 const image = require('../assets/login2.png')
 export default function Login({navigation}) {
 
+  //For navigation
     const loginPage = ()=>{
         navigation.navigate('Login')
     }

@@ -1,18 +1,22 @@
 
 import React, { useEffect,useMemo,useState } from 'react';
 import { ImageBackground,StyleSheet, Text, View,Button,Alert,TouchableOpacity,TextInput,ActivityIndicator } from 'react-native';
-import axios from 'axios';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import {login} from '../APIs/services'
 const image = require('../assets/LoginPage.png')
 export default function LoginPage({navigation}) {
+  //for loading
   const [isloading, setIsloading] = useState(false);
+  //for data to be sent
   const [data,setData] = useState({});
+    //for username
   const [username,setUsername] = useState("");
+  //for password
   const [password,setPassword] = useState("");
 
+  //Fill data state when username or password state changes
   useEffect(()=>{
     setData({
       username:username,
@@ -20,7 +24,7 @@ export default function LoginPage({navigation}) {
     })
   },[username,password])
 
-
+  //JsonWebToken Adding tokens to memory for
   const setToken = async (data)=>{
     try{
       await AsyncStorage.setItem('token',data);
@@ -29,10 +33,13 @@ export default function LoginPage({navigation}) {
     }
   }
 
+  //Login Request
   const loginFromApi = ()=>{
     setIsloading(true)
     login(data).then(function(response) {
       console.log(response)
+
+      //Sends the token from request to the setToken method
       setToken(response.data.token);
       if(response.data.length===0){
         navigation.navigate('Login')
@@ -47,6 +54,7 @@ export default function LoginPage({navigation}) {
   }
   
 
+  //manage loading stat and if loading status is true, show loading
   if(isloading){
     return(
       <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>

@@ -4,6 +4,7 @@ import CarnaRoutes from './routes/CarnaRoutes';
 export default function App() {
   return (
     <View style={styles.container}>
+      {/*StackRoutes*/}
       <CarnaRoutes />
     </View>
   );

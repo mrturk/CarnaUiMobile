@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+//Components
 import LoginPage from '../Pages/LoginPage'
 import Login from '../Pages/Login'
 import SignupPage from '../Pages/SignupPage'
@@ -10,6 +11,7 @@ export default function CarnaRoutes(){
     const Stack = createStackNavigator();
     return (
           <NavigationContainer >
+            {/*Route determination by components*/}
             <Stack.Navigator>
               <Stack.Screen name="Login or Register"  component={Login} />
               <Stack.Screen name="Login" component={LoginPage} />
